@@ -12,8 +12,7 @@ jobs:
       - name: Maximize build space
         uses: easimon/maximize-build-space@master
         with:
-          root-reserve-mb: 512
-          swap-size-mb: 1024
+          overprovision-lvm: 'true'
           remove-dotnet: 'true'
           remove-android: 'true'
           remove-haskell: 'true'
@@ -22,8 +21,11 @@ jobs:
 
       - name: Update and upgrade the system
         run: |
+          sudo apt-get purge ubuntu-desktop -o Dpkg::Options::=--force-confold -o Dpkg::Options::=--force-confdef -y --allow-downgrades --allow-remove-essential --allow-change-held-packages
+          sudo apt-get autoremove -o Dpkg::Options::=--force-confold -o Dpkg::Options::=--force-confdef -y --allow-downgrades --allow-remove-essential --allow-change-held-packages
+          sudo apt-get autoclean
           sudo apt-get update
-          sudo apt-get upgrade -o Dpkg::Options::="--force-confold" -o Dpkg::Options::=--force-confdef -y --allow-downgrades --allow-remove-essential --allow-change-held-packages
+          sudo apt-get upgrade -o Dpkg::Options::=--force-confold -o Dpkg::Options::=--force-confdef -y --allow-downgrades --allow-remove-essential --allow-change-held-packages
 
       - name: Install Android Platform Tools
         run: |
