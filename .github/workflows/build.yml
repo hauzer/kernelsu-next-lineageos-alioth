@@ -29,6 +29,7 @@ jobs:
         run: |
           wget https://dl.google.com/android/repository/platform-tools-latest-linux.zip
           unzip platform-tools-latest-linux.zip -d ~
+          rm platform-tools-latest-linux.zip
           echo "~/platform-tools" >> $GITHUB_PATH
 
       - name: Install LineageOS build dependencies
@@ -37,6 +38,7 @@ jobs:
           wget https://archive.ubuntu.com/ubuntu/pool/universe/n/ncurses/libtinfo5_6.3-2_amd64.deb && sudo dpkg -i libtinfo5_6.3-2_amd64.deb && rm -f libtinfo5_6.3-2_amd64.deb
           wget https://archive.ubuntu.com/ubuntu/pool/universe/n/ncurses/libncurses5_6.3-2_amd64.deb && sudo dpkg -i libncurses5_6.3-2_amd64.deb && rm -f libncurses5_6.3-2_amd64.deb
           sudo DEBIAN_FRONTEND=noninteractive apt-get install -yq python-is-python3
+          sudo apt-get clean
 
       - name: Setup LineageOS directories
         run: |
@@ -60,7 +62,7 @@ jobs:
         run: |
           echo "USE_CCACHE=1" >> $GITHUB_ENV
           echo "CCACHE_EXEC=/usr/bin/ccache" >> $GITHUB_ENV
-          ccache -M 50G
+          ccache -M 25G
 
       - name: Initialize the LineageOS repository
         run: |
@@ -79,6 +81,7 @@ jobs:
           git clone https://github.com/LineageOS/android_system_update_engine android/system/update_engine
           wget https://mirrorbits.lineageos.org/full/alioth/20250917/lineage-22.2-20250917-nightly-alioth-signed.zip
           unzip lineage-22.2-20250917-nightly-alioth-signed.zip
+          rm lineage-22.2-20250917-nightly-alioth-signed.zip
           ./android/prebuilts/extract-tools/linux-x86/bin/ota_extractor --payload payload.bin
           mkdir system/
           sudo mount -o ro system.img system/
@@ -88,6 +91,7 @@ jobs:
           sudo mount -o ro system_ext.img system/system_ext/
           cd ~/android/lineage/device/xiaomi/alioth
           ./extract-files.py ~/android/system_dump/
+          rm -r ~/android/system_dump/
 
       - name: Build
         run: |
