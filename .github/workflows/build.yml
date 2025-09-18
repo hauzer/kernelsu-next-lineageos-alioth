@@ -11,8 +11,8 @@ jobs:
     steps:
       - name: Update and upgrade the system
         run: |
-          apt-get update
-          apt-get upgrade -o Dpkg::Options::="--force-confold" -o Dpkg::Options::=--force-confdef -y --allow-downgrades --allow-remove-essential --allow-change-held-packages
+          sudo apt-get update
+          sudo apt-get upgrade -o Dpkg::Options::="--force-confold" -o Dpkg::Options::=--force-confdef -y --allow-downgrades --allow-remove-essential --allow-change-held-packages
 
       - name: Install Android Platform Tools
         run: |
@@ -22,10 +22,10 @@ jobs:
 
       - name: Install LineageOS build dependencies
         run: |
-          DEBIAN_FRONTEND=noninteractive apt-get install -yq bc bison build-essential ccache curl flex g++-multilib gcc-multilib git git-lfs gnupg gperf imagemagick protobuf-compiler python3-protobuf lib32readline-dev lib32z1-dev libdw-dev libelf-dev lz4 libsdl1.2-dev libssl-dev libxml2 libxml2-utils lzop pngcrush rsync schedtool squashfs-tools xsltproc zip zlib1g-dev
-          wget https://archive.ubuntu.com/ubuntu/pool/universe/n/ncurses/libtinfo5_6.3-2_amd64.deb && dpkg -i libtinfo5_6.3-2_amd64.deb && rm -f libtinfo5_6.3-2_amd64.deb
-          wget https://archive.ubuntu.com/ubuntu/pool/universe/n/ncurses/libncurses5_6.3-2_amd64.deb && dpkg -i libncurses5_6.3-2_amd64.deb && rm -f libncurses5_6.3-2_amd64.deb
-          DEBIAN_FRONTEND=noninteractive apt-get instalal -yq python-is-python3
+          sudo DEBIAN_FRONTEND=noninteractive apt-get install -yq bc bison build-essential ccache curl flex g++-multilib gcc-multilib git git-lfs gnupg gperf imagemagick protobuf-compiler python3-protobuf lib32readline-dev lib32z1-dev libdw-dev libelf-dev lz4 libsdl1.2-dev libssl-dev libxml2 libxml2-utils lzop pngcrush rsync schedtool squashfs-tools xsltproc zip zlib1g-dev
+          wget https://archive.ubuntu.com/ubuntu/pool/universe/n/ncurses/libtinfo5_6.3-2_amd64.deb && sudo dpkg -i libtinfo5_6.3-2_amd64.deb && rm -f libtinfo5_6.3-2_amd64.deb
+          wget https://archive.ubuntu.com/ubuntu/pool/universe/n/ncurses/libncurses5_6.3-2_amd64.deb && sudo dpkg -i libncurses5_6.3-2_amd64.deb && rm -f libncurses5_6.3-2_amd64.deb
+          sudo DEBIAN_FRONTEND=noninteractive apt-get instalal -yq python-is-python3
 
       - name: Setup LineageOS directories
         run: |
@@ -70,11 +70,11 @@ jobs:
           unzip lineage-22.2-20250917-nightly-alioth-signed.zip
           ./android/prebuilts/extract-tools/linux-x86/bin/ota_extractor --payload payload.bin
           mkdir system/
-          mount -o ro system.img system/
-          mount -o ro vendor.img system/vendor/
-          mount -o ro odm.img system/odm/
-          mount -o ro product.img system/product/
-          mount -o ro system_ext.img system/system_ext/
+          sudo mount -o ro system.img system/
+          sudo mount -o ro vendor.img system/vendor/
+          sudo mount -o ro odm.img system/odm/
+          sudo mount -o ro product.img system/product/
+          sudo mount -o ro system_ext.img system/system_ext/
           cd ~/android/lineage/device/xiaomi/alioth
           ./extract-files.py ~/android/system_dump/
 
