@@ -31,7 +31,7 @@ After that, a good starting point is just to try and install the regular, prebui
 
 As per LineageOS official guidelines, I used Ubuntu 24 LTS for my build machine. This is a VirtualBox guest inside of a Windows 10 host.
 
-I allocated 32GB of RAM to the VM, but it wasn't enough. I had to add a 16GB swap file, and enable 16GB of ZRAM. I used a 100GB compile cache.
+I allocated 32GB of RAM to the VM, but it wasn't enough. I had to add a 16GB swap file, and enable 16GB of ZRAM. I used a 100GB compiler cache.
 
 Additionally, these may be of help:
 
