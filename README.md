@@ -4,11 +4,11 @@
 
 I'll go over the general approach and cover some hurdles I encountered during the process. There's also some patches included, specifically to make KernelSU-Next and SUSFS work together nicely on a non-GKI kernel.
 
-<img width="33%" alt="kernelsu-next" src="https://github.com/user-attachments/assets/67cf6bdd-8500-4357-af32-6d87559fb52d" />
-
-<img width="33%" alt="susfs" src="https://github.com/user-attachments/assets/6b5e6902-fd90-419a-8478-aa0637cade96" />
-
-<img width="33%" alt="su" src="https://github.com/user-attachments/assets/b7e28cd5-2e4c-4287-941a-fecff4ff762f" />
+<p align='center'>
+  <img width="30%" alt="kernelsu-next" src="https://github.com/user-attachments/assets/67cf6bdd-8500-4357-af32-6d87559fb52d" />
+  <img width="30%" alt="susfs" src="https://github.com/user-attachments/assets/6b5e6902-fd90-419a-8478-aa0637cade96" />
+  <img width="30%" alt="su" src="https://github.com/user-attachments/assets/b7e28cd5-2e4c-4287-941a-fecff4ff762f" />
+</p>
 
 </br>
 
