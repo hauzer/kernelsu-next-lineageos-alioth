@@ -51,14 +51,12 @@ In any case, the rest of the steps in this guide are done before starting the ac
 
 ## <img height="24" alt="kernelsu-next-logo" src="https://github.com/user-attachments/assets/4629eb5d-6681-4e6e-b3af-0bd2b15be5c0" /> KernelSU-Next
 
-KernelSU-Next _does_ support non-GKI kernels, but it's not entirely clear from the docs what the exact steps are to enable this.
-
 Follow the official build [page](https://kernelsu-next.github.io/webpage/pages/installation.html) and set up the driver inside the kernel source tree.
 
 > [!NOTE]
 > _**How I did it**_
 > 
-> Follow the KernelSU page on [integrating with non-GKI kernels](https://kernelsu.org/guide/how-to-integrate-for-non-gki.html#manually-modify-the-kernel-source). Ignore the `kprobes` section and just follow the stuff under `Manually modify the kernel source`, including modyfing the code. You should add `CONFIG_KSU=y` to `<KERNEL_ROOT>/arch/arm64/configs/vendor/xiaomi/alioth.config`.
+> KernelSU-Next _does_ support non-GKI kernels, but it's not entirely clear from the docs what the exact steps are to enable this. Follow the KernelSU page on [integrating with non-GKI kernels](https://kernelsu.org/guide/how-to-integrate-for-non-gki.html#manually-modify-the-kernel-source). Ignore the `kprobes` section and just follow the stuff under `Manually modify the kernel source`, including modyfing the code. You should add `CONFIG_KSU=y` to `<KERNEL_ROOT>/arch/arm64/configs/vendor/xiaomi/alioth.config`.
 
 
 ## <img height="24" alt="susfs-logo" src="https://github.com/user-attachments/assets/13af3f4e-3905-41f3-84c0-79a066f27b71" /> SUSFS
