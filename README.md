@@ -1,4 +1,5 @@
-# <img height="28" alt="xiaomi-logo" src="https://github.com/user-attachments/assets/d6fd8ae6-1dd1-4d9f-be16-9631f4a2028b" /> POCO F3: <img height="28" alt="lineageos-logo" src="https://github.com/user-attachments/assets/892b2613-53ee-4431-adfa-d58d6c610b7a" /> LineageOS + <img height="28" alt="kernelsu-next-logo" src="https://github.com/user-attachments/assets/4629eb5d-6681-4e6e-b3af-0bd2b15be5c0" /> KernelSU-Next + <img height="28" alt="susfs-logo" src="https://github.com/user-attachments/assets/13af3f4e-3905-41f3-84c0-79a066f27b71" /> SUSFS
+# <img height="28" alt="xiaomi-logo" src="https://github.com/user-attachments/assets/d6fd8ae6-1dd1-4d9f-be16-9631f4a2028b" />: <img height="28" alt="lineageos-logo" src="https://github.com/user-attachments/assets/892b2613-53ee-4431-adfa-d58d6c610b7a" /> + <img height="28" alt="kernelsu-next-logo" src="https://github.com/user-attachments/assets/4629eb5d-6681-4e6e-b3af-0bd2b15be5c0" /> + <img height="28" alt="susfs-logo" src="https://github.com/user-attachments/assets/13af3f4e-3905-41f3-84c0-79a066f27b71" />
+# POCO F3: LineageOS + KernelSU-Next + SUSFS
 
 **_Welcome!_** This is a guide on how to build a LineageOS ROM for POCO F3, with KernelSU-Next and SUSFS built-in!
 
