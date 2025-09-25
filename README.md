@@ -41,7 +41,7 @@ Additionally, these may be of help:
 
 ## <img height="24" alt="lineageos-logo" src="https://github.com/user-attachments/assets/892b2613-53ee-4431-adfa-d58d6c610b7a" /> LineageOS
 
-We mostly rely on the LineageOS build [guide](https://wiki.lineageos.org/devices/alioth/build/variant1/). I recommend going through it completely, building the vanilla LineageOS ROM and installing it. This will help you understand the process completely and also verify that your phone works as it should.
+We mostly rely on the LineageOS build [guide](https://wiki.lineageos.org/devices/alioth/build/variant1/). I recommend going through it completely, building the vanilla LineageOS ROM and installing it. This will help you understand the process and also verify that your phone works as it should.
 
 In any case, the rest of the steps in this guide are done before starting the actual build ([Start the build](https://wiki.lineageos.org/devices/alioth/build/variant1/#start-the-build)). Make sure you have the whole LineageOS build environment set-up, including the kernel and proprietary blobs.
 
