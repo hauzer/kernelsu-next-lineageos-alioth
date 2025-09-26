@@ -10,6 +10,27 @@ index b67b9b5957aa..a12a42a9ea88 100644
  # Platform
  CONFIG_MACH_XIAOMI_ALIOTH=y
  
+diff --git a/drivers/Kconfig b/drivers/Kconfig
+index 5730f817f827..0c0fff69577a 100644
+--- a/drivers/Kconfig
++++ b/drivers/Kconfig
+@@ -234,4 +234,5 @@ source "drivers/sensors/Kconfig"
+ source "drivers/gpu/msm/Kconfig"
+ 
+ source "drivers/energy_model/Kconfig"
++source "drivers/kernelsu/Kconfig"
+ endmenu
+diff --git a/drivers/Makefile b/drivers/Makefile
+index 832134439d8c..67458d58955c 100644
+--- a/drivers/Makefile
++++ b/drivers/Makefile
+@@ -193,3 +193,6 @@ obj-$(CONFIG_UNISYS_VISORBUS)	+= visorbus/
+ obj-$(CONFIG_SIOX)		+= siox/
+ obj-$(CONFIG_GNSS)		+= gnss/
+ obj-$(CONFIG_SENSORS_SSC)	+= sensors/
++
++
++obj-$(CONFIG_KSU) += kernelsu/
 diff --git a/drivers/input/input.c b/drivers/input/input.c
 index 70ffffea3e58..beba87d4f37f 100644
 --- a/drivers/input/input.c
@@ -34,6 +55,19 @@ index 70ffffea3e58..beba87d4f37f 100644
  
  	if (disposition != INPUT_IGNORE_EVENT && type != EV_SYN)
  		add_input_randomness(type, code, value);
+diff --git a/fs/Makefile b/fs/Makefile
+index 0fc34cafe665..8f4b814e1eb5 100644
+--- a/fs/Makefile
++++ b/fs/Makefile
+@@ -14,6 +14,8 @@ obj-y :=	open.o read_write.o file_table.o super.o \
+ 		pnode.o splice.o sync.o utimes.o d_path.o \
+ 		stack.o fs_struct.o statfs.o fs_pin.o nsfs.o
+ 
++obj-$(CONFIG_KSU_SUSFS) += susfs.o
++
+ ifeq ($(CONFIG_BLOCK),y)
+ obj-y +=	buffer.o block_dev.o direct-io.o mpage.o
+ else
 diff --git a/fs/dcache.c b/fs/dcache.c
 index 247442141ddf..83d5a35e62b3 100644
 --- a/fs/dcache.c
@@ -1573,7 +1607,6 @@ index 6ac5d1bed8d1..4ccb49f666ac 100644
  	up_read(&uts_sem);
  	if (copy_to_user(name, &tmp, sizeof(tmp)))
  		return -EFAULT;
-
 diff --git a/KernelSU-Next/kernel/Kconfig b/KernelSU-Next/kernel/Kconfig
 index ab6dd5c9..e04c0076 100644
 --- a/KernelSU-Next/kernel/Kconfig
@@ -2357,9 +2390,9 @@ index 4f810bdc..6b388100 100644
 +	ksu_try_umount("/vendor", true, 0, uid);
 +	ksu_try_umount("/product", true, 0, uid);
 +	ksu_try_umount("/odm", true, 0, uid);
-+	// - For '/data/KernelSU-Next/adb/KernelSU-Next/modules' we pass 'false' here because it is a loop device that we can't determine whether 
++	// - For '/data/adb/modules' we pass 'false' here because it is a loop device that we can't determine whether 
 +	//   its dev_name is KSU or not, and it is safe to just umount it if it is really a mountpoint
-+	ksu_try_umount("/data/KernelSU-Next/adb/KernelSU-Next/modules", false, MNT_DETACH, uid);
++	ksu_try_umount("/data/adb/modules", false, MNT_DETACH, uid);
 +	/* For both Legacy KSU and Magic Mount KSU */
 +	ksu_try_umount("/debug_ramdisk", true, MNT_DETACH, uid);
 +}
@@ -2432,19 +2465,19 @@ index 4f810bdc..6b388100 100644
 +	susfs_try_umount_all(new_uid.val);
 +#else
  	// fixme: use `collect_mounts` and `iterate_mount` to iterate all mountpoint and
- 	// filter the mountpoint whose target is `/data/KernelSU-Next/adb`
+ 	// filter the mountpoint whose target is `/data/adb`
 -	try_umount("/odm", true, 0);
 -	try_umount("/system", true, 0);
 -	try_umount("/system_ext", true, 0);
 -	try_umount("/vendor", true, 0);
 -	try_umount("/product", true, 0);
--	try_umount("/data/KernelSU-Next/adb/KernelSU-Next/modules", false, MNT_DETACH);
+-	try_umount("/data/adb/modules", false, MNT_DETACH);
 +	ksu_try_umount("/odm", true, 0);
 +	ksu_try_umount("/system", true, 0);
 +	ksu_try_umount("/system_ext", true, 0);
 +	ksu_try_umount("/vendor", true, 0);
 +	ksu_try_umount("/product", true, 0);
-+	ksu_try_umount("/data/KernelSU-Next/adb/KernelSU-Next/modules", false, MNT_DETACH);
++	ksu_try_umount("/data/adb/modules", false, MNT_DETACH);
  
  	// try umount ksu temp path
 -	try_umount("/debug_ramdisk", false, MNT_DETACH);
@@ -2634,7 +2667,7 @@ index cc2df243..26974c9c 100644
 +++ b/KernelSU-Next/kernel/ksud.h
 @@ -5,7 +5,7 @@
  
- #define KSUD_PATH "/data/KernelSU-Next/adb/KernelSU-Next/ksud"
+ #define KSUD_PATH "/data/adb/ksud"
  
 -void on_post_fs_data(void);
 +void ksu_on_post_fs_data(void);
