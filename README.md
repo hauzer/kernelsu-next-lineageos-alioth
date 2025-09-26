@@ -71,7 +71,7 @@ SUSFS has an official [branch](https://gitlab.com/simonpunk/susfs4ksu/-/tree/ker
 
 ## 🩹 Apply the Patches
 
-TODO
+Now, simply download our combined [patch](https://github.com/hauzer/poco-f3_lineageos_kernelsu-next_susfs/blob/master/kernelsu-next_susfs.patch) into the root kernel directory, and run `patch -p1 < [PATCH_FILE]`!
 
 
 ## 🔨 Build!
